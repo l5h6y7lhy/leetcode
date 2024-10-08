@@ -1,2 +1,2 @@
 # leetcode
-Solutions to leetcode problems with codes, algorithm analysis and related papers.
+I would like to share my thoughts on interesting Leetcode problems here.
