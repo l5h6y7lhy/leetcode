@@ -15,12 +15,6 @@ public:
             }
         }
 
-        if (index[0] > index[1]) {
-            index[0] ^= index[1];
-            index[1] ^= index[0];
-            index[0] ^= index[1];
-        }
-
         return index;
     }
 
@@ -30,7 +24,7 @@ private:
         vector<int> result;
         result.resize(2 * len);
 
-        if(end - start == 1) {
+        if(len == 1) {
             result[0] = nums[start];
             result[1] = start;
             return result;
