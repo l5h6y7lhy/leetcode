@@ -6,11 +6,12 @@ public:
         vector<int> index;
 
         while (i < j) {
-            if (result[i] + result[j] < target) {i++;}
-            else if (result[i] + result[j] > target) {j--;}
+            int c_sum = nums[result[i]] + nums[result[j]];
+            if (c_sum < target) {i++;}
+            else if (c_sum > target) {j--;}
             else {
-                index.push_back(result[i+nums.size()]);
-                index.push_back(result[j+nums.size()]);
+                index.push_back(result[i]);
+                index.push_back(result[j]);
                 break;
             }
         }
@@ -22,11 +23,10 @@ private:
     vector<int> mergeSort_index(vector<int>& nums, int start, int end) {
         int len = end - start, l;
         vector<int> result;
-        result.resize(2 * len);
+        result.resize(len);
 
         if(len == 1) {
-            result[0] = nums[start];
-            result[1] = start;
+            result[0] = start;
             return result;
         }
 
@@ -40,27 +40,23 @@ private:
         int lp=0, rp=0;
 
         while(lp < l && rp < r){
-            if (left[lp] <= right[rp]){
+            if (nums[left[lp]] <= nums[right[rp]]){
                 result[lp+rp] = left[lp];
-                result[lp + rp + len] = left[lp + l];
                 lp++;
             }
             else {
                 result[lp+rp] = right[rp];
-                result[lp + rp + len] = right[rp + r];
                 rp++;
             }
         }
 
         while (lp < l) {
             result[lp+rp] = left[lp];
-            result[lp + rp + len] = left[lp + l];
             lp++;
         }
 
         while (rp < r) {
             result[lp+rp] = right[rp];
-            result[lp + rp + len] = right[rp + r];
             rp++;
         }
 
