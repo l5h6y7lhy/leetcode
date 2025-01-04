@@ -1,11 +1,10 @@
 class Solution {
 public:
     vector<string> generateParenthesis(int n) {
-        r[1].push_back("()");
+        r[0].push_back("");
         pivot.resize(9);
-        pivot[1] = 0;
 
-        for (int i = 2; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
 
             for (int j = 0; j < r[i-1].size(); j++) {
                 r[i].push_back("(" + r[i-1][j] + ")");
@@ -15,7 +14,7 @@ public:
             t = "";
 
             pivot[i] = r[i].size();
-            construct(i, false);
+            construct(i);
         }
 
         return r[n];
@@ -27,34 +26,21 @@ private:
     int target;
     string t;
 
-    void construct(int& n, bool record) {
+    void construct(int& n) {
         if (target == n) {
             r[n].push_back(t);
             return;
         }
 
-        if (!record) {
-            string pa = "";
-            for (int i = 0; target + i <= n; i++) {
+        for (int i = 1; i < n; i++) {
+            if (target + i > n) {break;}
+
+            for (int j = 0; j < pivot[i]; j++) {
                 target += i;
-                t += pa;
-                construct(n, true);
+                t += r[i][j];
+                construct(n);
                 target -= i;
                 t.resize(2 * target);
-                pa += "()";
-            }
-        }
-        else {
-            for (int i = 2; i < n; i++) {
-                if (target + i > n) {break;}
-
-                for (int j = 0; j < pivot[i]; j++) {
-                    target += i;
-                    t += r[i][j];
-                    construct(n, false);
-                    target -= i;
-                    t.resize(2 * target);
-                }
             }
         }
     }
