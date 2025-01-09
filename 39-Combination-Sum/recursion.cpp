@@ -14,14 +14,8 @@ public:
 
         csum = 0;
         t = target;
-
-        for (l = candidates.size() - 1; l >= 0 && candidates[l] <= (t - csum); l--) {
-            csum += candidates[l];
-            curr.push_back(candidates[l]);
-            search(candidates, l);
-            csum -= candidates[l];
-            curr.pop_back();
-        }
+        l = candidates.size() - 1;
+        search(candidates, l);
 
         return result;
     }
