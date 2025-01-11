@@ -2,33 +2,24 @@ class Solution {
 public:
     int jump(vector<int>& nums) {
         int l = nums.size();
+        int result = 0;
+        int prev = 0;
         int last = 0;
 
-        vector<int> dist;
-        dist.assign(l, 0);
-
-        queue<int> r;
-        r.push(0);
-
         while (last < l - 1) {
-            int curr = r.front();
-            r.pop();
+            int dist = 0;
 
-            if (curr + nums[curr] <= last) {continue;}
-
-            int i = last + 1;
-
-            while (i <= curr + nums[curr] && i < l) {
-                if (!dist[i]) {
-                    dist[i] = dist[curr] + 1;
-                    r.push(i);
+            for (int i = prev; i <= last; i++) {
+                if (i + nums[i] > dist) {
+                    dist = i + nums[i];
                 }
-                i++;
             }
 
-            last = i - 1;
+            prev = last + 1;
+            last = dist;
+            result++;
         }
 
-        return dist[l - 1];
+        return result;
     }
 };
