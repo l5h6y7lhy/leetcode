@@ -28,11 +28,6 @@ private:
     void binarySearch(vector<int>& nums, int& target) {
         if (end < start) {return;}
 
-        if (start == end) {
-            if (nums[start] == target) {result[limit] = start;}
-            return;
-        }
-
         int middle = (start + end) / 2;
 
         if (nums[middle] == target) {

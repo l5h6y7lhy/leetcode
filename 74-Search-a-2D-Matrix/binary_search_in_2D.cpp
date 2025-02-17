@@ -12,7 +12,6 @@ private:
 
     bool findA(vector<int>& vec, int& target, int l, int r) {
         if (r < l) {return false;}
-        if (l == r) {return (target == vec[l]);}
 
         int md = (l + r) / 2;
 
@@ -27,7 +26,6 @@ private:
 
     bool findV(vector<vector<int>>& matrix, int& target, int l, int r) {
         if (r < l) {return false;}
-        if (l == r) {return findA(matrix[l], target, 0, n - 1);}
 
         int md = (l + r) / 2;
 

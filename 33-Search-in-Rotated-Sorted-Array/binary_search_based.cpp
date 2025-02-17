@@ -47,13 +47,6 @@ private:
         int c1 = (start + offset) % l;
         int c2 = (end + offset) % l;
 
-        if (start == end) {
-            if (target == nums[c1]) {
-                result = c1;
-            }
-            return;
-        }
-
         int middle = (start + end) / 2;
         int c3 = (middle + offset) % l;
 
