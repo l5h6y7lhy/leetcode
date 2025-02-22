@@ -17,6 +17,8 @@ public:
         int result, diff = INT_MAX;
 
         for (int i = l - 1; i >= 0; i--) {
+            if (i < l - 1 && nums[i] == nums[i+1]) {continue;}
+
             int j = i - 1, k = 0;
 
             while (j > k) {

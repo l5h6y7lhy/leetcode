@@ -6,6 +6,8 @@ public:
         int result, diff = INT_MAX;
 
         for (int i = 0; i < l; i++) {
+            if (i > 0 && reo[i] == reo[i-1]) {continue;}
+
             int j = i+1, k = l-1;
 
             while (j < k) {
