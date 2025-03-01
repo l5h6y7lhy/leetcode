@@ -51,6 +51,8 @@ public:
                     if ((r[i][j].height).back() * (r[i][j].length).back() > maxA) {
                         maxA = (r[i][j].height).back() * (r[i][j].length).back();
                     }
+
+                    if (find) {break;}
                 }
 
                 if (!find) {
