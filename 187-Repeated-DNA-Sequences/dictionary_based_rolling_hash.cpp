@@ -16,7 +16,7 @@ public:
             else {key += 3;}
         }
 
-        vector<int> r(f, 0);
+        unordered_map<int, int> r;
         r[key] = 1;
         f /= 4;
 
@@ -30,7 +30,6 @@ public:
             else {key += 3;}
 
             r[key]++;
-
             if (r[key] == 2) {addSeq();}
         }
 
