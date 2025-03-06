@@ -1,59 +1,40 @@
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
-        for (int i = 0; i < nums.size(); i++) {
-            if (r.size() < k) {
-                r.push_back(nums[i]);
-                heapifyUp(r.size());
-            }
-            else if (nums[i] > r[0]) {
-                r[0] = nums[i];
-                heapifyDown(1);
-            }
+        for (int i = k / 2; i > 0; i--) {heapifyDown(nums, i, k);}
+
+        for (int i = k; i < nums.size(); i++) {
+            if (nums[i] <= nums[0]) {continue;}
+            nums[0] = nums[i];
+            heapifyDown(nums, 1, k);
         }
 
-        return r[0];
+        return nums[0];
     }
 
 private:
-    vector<int> r;
+    void heapifyDown(vector<int>& nums,int index, int& k) {
+        int c = nums[index - 1];
 
-    void heapifyUp(int index) {
-        if (index > 1) {
-            int parent = index / 2;
-
-            if (r[index - 1] < r[parent - 1]) {
-                r[index - 1] ^= r[parent - 1];
-                r[parent - 1] ^= r[index - 1];
-                r[index - 1] ^= r[parent - 1];
-                heapifyUp(parent);
-            }
-        }
-    }
-
-    void heapifyDown(int index) {
-        int l = r.size();
-        int c = r[index - 1];
-
-        if (index <= (l/2)) {
-            int left = r[(2 * index) - 1];
+        if (index <= (k/2)) {
+            int left = nums[(2 * index) - 1];
             int right = INT_MAX;
 
-            if ((2 * index) + 1 <= l) {
-                right = r[2 * index];
+            if ((2 * index) + 1 <= k) {
+                right = nums[2 * index];
             }
 
             if (left <= right && c > left) {
-                r[index - 1] ^= r[(2 * index) - 1];
-                r[(2 * index) - 1] ^= r[index - 1];
-                r[index - 1] ^= r[(2 * index) - 1];
-                heapifyDown(2 * index);
+                nums[index - 1] ^= nums[(2 * index) - 1];
+                nums[(2 * index) - 1] ^= nums[index - 1];
+                nums[index - 1] ^= nums[(2 * index) - 1];
+                heapifyDown(nums, 2 * index, k);
             }
             else if (left > right && c > right) {
-                r[index - 1] ^= r[2 * index];
-                r[2 * index] ^= r[index - 1];
-                r[index - 1] ^= r[2 * index];
-                heapifyDown((2 * index) + 1);
+                nums[index - 1] ^= nums[2 * index];
+                nums[2 * index] ^= nums[index - 1];
+                nums[index - 1] ^= nums[2 * index];
+                heapifyDown(nums, (2 * index) + 1, k);
             }
         }
 
