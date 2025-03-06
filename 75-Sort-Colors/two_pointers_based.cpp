@@ -32,12 +32,6 @@ public:
                 continue;
             }
 
-            if (ml >= 0 && mr < l && nums[ml] > nums[mr]) {
-                nums[ml] ^= nums[mr];
-                nums[mr] ^= nums[ml];
-                nums[ml] ^= nums[mr];
-            }
-
             if (ml >= 0 && nums[ml] == 1) {
                 ml--;
                 continue;
