@@ -12,11 +12,9 @@ public:
         int c = 0;
 
         while (head) {
-            if (!head->next) {return false;}
-            if (head->next == head) {return true;}
-
-            ListNode* tmp = head->next;
-            int t = c + 1;
+            c++;
+            ListNode* tmp = head;
+            int t = c;
 
             for (int i = 0; i < c; i++) {
                 tmp = tmp->next;
