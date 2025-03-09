@@ -1,7 +1,8 @@
 class Solution {
 public:
     void wiggleSort(vector<int>& nums) {
-        if ((l = nums.size()) == 1) {return;}
+        int l = nums.size();
+        tmp.resize(l);
 
         half = l / 2;
         ul = l - 1;
@@ -9,65 +10,60 @@ public:
         if (l % 2 == 0) {half--;}
         if (l % 2 == 1) {ul--;}
 
-        vector<int> reo = mergeSort(nums, 0, l);
-
-        for (int i = 0; i < l; i++) {
-            nums[coordinate(i)] = reo[i];
-        }
+        mergeSort(nums, 0, l);
 
         return;
     }
 
 private:
-    int l;
     int half;
     int ul;
+    vector<int> tmp;
 
-    int coordinate(int& i) {
+    int coordinate(int i) {
         if (i <= half) {return (half - i) * 2;}
         return ul - (2 * (i - half - 1));
     }
 
-    vector<int> mergeSort(vector<int>& nums, int start, int end) {
+    void mergeSort(vector<int>& nums, int start, int end) {
         int len = end - start, l;
-        vector<int> result;
-        result.resize(len);
 
         if(len == 1) {
-            result[0] = nums[start];
-            return result;
+            return;
         }
 
         if (len % 2 == 0) {l = len / 2;}
-        else {l = (len/2)+1;}
+        else {l = (len / 2) + 1;}
         int r = len - l;
 
-        vector<int> left = mergeSort(nums, start, start + l);
-        vector<int> right = mergeSort(nums, start + l, end);
+        mergeSort(nums, start,     start + l);
+        mergeSort(nums, start + l, end);
 
-        int lp=0, rp=0;
+        int lp = 0, rp = 0;
 
-        while(lp < l && rp < r){
-            if (left[lp] <= right[rp]){
-                result[lp+rp] = left[lp];
+        while (lp < l && rp < r){
+            if (nums[coordinate(start + lp)] <= nums[coordinate(start + l + rp)]){
+                tmp[start + lp + rp] = nums[coordinate(start + lp)];
                 lp++;
             }
             else {
-                result[lp+rp] = right[rp];
+                tmp[start + lp + rp] = nums[coordinate(start + l + rp)];
                 rp++;
             }
         }
 
         while (lp < l) {
-            result[lp+rp] = left[lp];
+            tmp[start + lp + rp] = nums[coordinate(start + lp)];
             lp++;
         }
 
         while (rp < r) {
-            result[lp+rp] = right[rp];
+            tmp[start + lp + rp] = nums[coordinate(start + l + rp)];
             rp++;
         }
 
-        return result;
+        for (int i = start; i < end; i++) {nums[coordinate(i)] = tmp[i];}
+
+        return;
     }
 };

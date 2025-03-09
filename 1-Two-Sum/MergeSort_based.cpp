@@ -1,7 +1,10 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        vector<int> result = mergeSort_index(nums, 0, nums.size());
+        for (int i = 0; i < nums.size(); i++) {result.push_back(i);}
+        tmp.resize(nums.size());
+
+        mergeSort_index(nums, 0, nums.size());
         int i = 0, j = nums.size() - 1;
         vector<int> index;
 
@@ -20,46 +23,47 @@ public:
     }
 
 private:
-    vector<int> mergeSort_index(vector<int>& nums, int start, int end) {
+    vector<int> result, tmp;
+
+    void mergeSort_index(vector<int>& nums, int start, int end) {
         int len = end - start, l;
-        vector<int> result;
-        result.resize(len);
 
         if(len == 1) {
-            result[0] = start;
-            return result;
+            return;
         }
 
         if (len % 2 == 0) {l = len / 2;}
         else {l = (len/2)+1;}
         int r = len - l;
 
-        vector<int> left = mergeSort_index(nums, start, start + l);
-        vector<int> right = mergeSort_index(nums, start + l, end);
+        mergeSort_index(nums, start, start + l);
+        mergeSort_index(nums, start + l, end);
 
         int lp=0, rp=0;
 
         while(lp < l && rp < r){
-            if (nums[left[lp]] <= nums[right[rp]]){
-                result[lp+rp] = left[lp];
+            if (nums[result[start + lp]] <= nums[result[start + l + rp]]){
+                tmp[start+ lp + rp] = result[start + lp];
                 lp++;
             }
             else {
-                result[lp+rp] = right[rp];
+                tmp[start+ lp + rp] = result[start + l + rp];
                 rp++;
             }
         }
 
         while (lp < l) {
-            result[lp+rp] = left[lp];
+            tmp[start+ lp + rp] = result[start + lp];
             lp++;
         }
 
         while (rp < r) {
-            result[lp+rp] = right[rp];
+            tmp[start+ lp + rp] = result[start + l + rp];
             rp++;
         }
 
-        return result;
+        for (int i = start; i < end; i++) {result[i] = tmp[i];}
+
+        return;
     }
 };

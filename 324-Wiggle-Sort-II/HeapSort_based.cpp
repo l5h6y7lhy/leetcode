@@ -1,8 +1,7 @@
 class Solution {
 public:
     void wiggleSort(vector<int>& nums) {
-        if ((l = nums.size()) == 1) {return;}
-
+        l = nums.size();
         half = l / 2;
         ul = l - 1;
 

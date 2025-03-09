@@ -2,50 +2,52 @@ class Solution {
 public:
     vector<int> countSmaller(vector<int>& nums) {
         result.assign(nums.size(), 0);
+        for (int i = 0; i < nums.size(); i++) {reo.push_back(i);}
+        tmp.resize(nums.size());
+
         MergeSort(nums, 0, nums.size() - 1);
         return result;
     }
 
 private:
-    vector<int> result;
+    vector<int> result, reo, tmp;
 
-    vector<int> MergeSort(vector<int>& nums, int s, int e) {
-        vector<int> r;
-
+    void MergeSort(vector<int>& nums, int s, int e) {
         if (s == e) {
-            r.push_back(s);
-            return r;
+            return;
         }
 
         int m = (s + e) / 2;
-        vector<int> left  = MergeSort(nums, s,     m);
-        vector<int> right = MergeSort(nums, m + 1, e);
+        MergeSort(nums, s,     m);
+        MergeSort(nums, m + 1, e);
 
         int i = 0, j = 0;
 
-        while (i < left.size() && j < right.size()) {
-            if (nums[right[j]] >= nums[left[i]]) {
-                r.push_back(left[i]);
-                result[left[i]] += j;
+        while (i < m - s + 1 && j < e - m) {
+            if (nums[reo[m + 1 + j]] >= nums[reo[s + i]]) {
+                tmp[s + i + j] = reo[s + i];
+                result[reo[s + i]] += j;
                 i++;
             }
             else {
-                r.push_back(right[j]);
+                tmp[s + i + j] = reo[m + 1 + j];
                 j++;
             }
         }
 
-        while (j < right.size()) {
-            r.push_back(right[j]);
+        while (j < e - m) {
+            tmp[s + i + j] = reo[m + 1 + j];
             j++;
         }
 
-        while (i < left.size()) {
-            r.push_back(left[i]);
-            result[left[i]] += j;
+        while (i < m - s + 1) {
+            tmp[s + i + j] = reo[s + i];
+            result[reo[s + i]] += j;
             i++;
         }
 
-        return r;
+        for (int l = s; l <= e; l++) {reo[l] = tmp[l];}
+
+        return;
     }
 };
