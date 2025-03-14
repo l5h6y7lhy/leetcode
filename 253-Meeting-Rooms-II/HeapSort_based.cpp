@@ -4,13 +4,13 @@ public:
         l = intervals.size();
 
         for (int i = 0; i < l; i++) {
-            r1.push_back(i);
-            r2.push_back(i);
+            r1.push_back(intervals[i][0]);
+            r2.push_back(intervals[i][1]);
         }
 
         for (int i = l / 2; i > 0; i--) {
-            heapifyDownr1(intervals, i);
-            heapifyDownr2(intervals, i);
+            heapifyDownr1(i);
+            heapifyDownr2(i);
         }
 
         while(l > 1) {
@@ -23,8 +23,8 @@ public:
             r2[l - 1] ^= r2[0];
 
             l--;
-            heapifyDownr1(intervals, 1);
-            heapifyDownr2(intervals, 1);
+            heapifyDownr1(1);
+            heapifyDownr2(1);
         }
 
         l = intervals.size() - 1;
@@ -33,11 +33,11 @@ public:
         int result = 0;
 
         while (1) {
-            if (intervals[r1[l]][0] < intervals[r2[h]][1]) {
+            if (r1[l] < r2[h]) {
                 count++;
                 l--;
             }
-            else if (intervals[r1[l]][0] == intervals[r2[h]][1]) {
+            else if (r1[l] == r2[h]) {
                 l--;
                 h--;
             }
@@ -57,56 +57,56 @@ private:
     int l;
     vector<int> r1, r2;
 
-    void heapifyDownr1(vector<vector<int>>& intervals, int index) {
-        int c = intervals[r1[index - 1]][0];
+    void heapifyDownr1(int index) {
+        int c = r1[index - 1];
 
         if (index <= (l/2)) {
-            int left = intervals[r1[(2 * index) - 1]][0];
+            int left = r1[(2 * index) - 1];
 
             int right = INT_MAX;
             if ((2 * index) + 1 <= l) {
-                right = intervals[r1[2 * index]][0];
+                right = r1[2 * index];
             }
 
             if (left <= right && c > left) {
                 r1[index - 1] ^= r1[(2 * index) - 1];
                 r1[(2 * index) - 1] ^= r1[index - 1];
                 r1[index - 1] ^= r1[(2 * index) - 1];
-                heapifyDownr1(intervals, 2 * index);
+                heapifyDownr1(2 * index);
             }
             else if (left > right && c > right) {
                 r1[index - 1] ^= r1[2 * index];
                 r1[2 * index] ^= r1[index - 1];
                 r1[index - 1] ^= r1[2 * index];
-                heapifyDownr1(intervals, (2 * index) + 1);
+                heapifyDownr1((2 * index) + 1);
             }
         }
 
         return;
     }
 
-    void heapifyDownr2(vector<vector<int>>& intervals, int index) {
-        int c = intervals[r2[index - 1]][1];
+    void heapifyDownr2(int index) {
+        int c = r2[index - 1];
 
         if (index <= (l/2)) {
-            int left = intervals[r2[(2 * index) - 1]][1];
+            int left = r2[(2 * index) - 1];
 
             int right = INT_MAX;
             if ((2 * index) + 1 <= l) {
-                right = intervals[r2[2 * index]][1];
+                right = r2[2 * index];
             }
 
             if (left <= right && c > left) {
                 r2[index - 1] ^= r2[(2 * index) - 1];
                 r2[(2 * index) - 1] ^= r2[index - 1];
                 r2[index - 1] ^= r2[(2 * index) - 1];
-                heapifyDownr2(intervals, 2 * index);
+                heapifyDownr2(2 * index);
             }
             else if (left > right && c > right) {
                 r2[index - 1] ^= r2[2 * index];
                 r2[2 * index] ^= r2[index - 1];
                 r2[index - 1] ^= r2[2 * index];
-                heapifyDownr2(intervals, (2 * index) + 1);
+                heapifyDownr2((2 * index) + 1);
             }
         }
 
