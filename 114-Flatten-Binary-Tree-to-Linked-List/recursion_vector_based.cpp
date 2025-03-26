@@ -12,8 +12,6 @@
 class Solution {
 public:
     void flatten(TreeNode* root) {
-        if (!root) {return;}
-
         record(root);
 
         for (int i = r.size() - 1; i >= 0; i--) {

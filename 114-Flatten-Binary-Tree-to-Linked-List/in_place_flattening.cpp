@@ -18,11 +18,17 @@ public:
                 continue;
             }
 
+            if (!root->right) {
+                root->right = root->left;
+                root->left = NULL;
+                root = root->right;
+                continue;
+            }
+
             TreeNode* tmp = root->left;
 
-            while (tmp->left || tmp->right) {
-                if (tmp->right) {tmp = tmp->right;}
-                else {tmp = tmp->left;}
+            while (tmp->right) {
+                tmp = tmp->right;
             }
 
             tmp->right = root->right;
