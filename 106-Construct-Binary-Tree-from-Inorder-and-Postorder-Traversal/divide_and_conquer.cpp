@@ -17,8 +17,7 @@ public:
         }
 
         TreeNode* root;
-        build(postorder, postorder.size() - 1, root,
-              inorder, 0, inorder.size() - 1);
+        build(postorder, postorder.size() - 1, root, 0, inorder.size() - 1);
 
         return root;
     }
@@ -26,19 +25,18 @@ public:
 private:
     unordered_map<int, int> in;
 
-    int build(vector<int>& postorder, int postl, TreeNode*& r,
-              vector<int>& inorder,   int inl,   int inr) {
+    int build(vector<int>& postorder, int postl, TreeNode*& r, int inl,   int inr) {
         r = new TreeNode(postorder[postl]);
 
         int r_in = in[postorder[postl]];
         int tmp = postl;
 
         if (r_in < inr) {
-            tmp = build(postorder, tmp - 1, r->right, inorder, r_in + 1, inr);
+            tmp = build(postorder, tmp - 1, r->right, r_in + 1, inr);
         }
 
         if (r_in > inl) {
-            tmp = build(postorder, tmp - 1, r->left, inorder, inl, r_in - 1);
+            tmp = build(postorder, tmp - 1, r->left, inl, r_in - 1);
         }
 
         return tmp;
