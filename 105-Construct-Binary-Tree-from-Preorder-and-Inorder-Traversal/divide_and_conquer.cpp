@@ -13,7 +13,6 @@ class Solution {
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         for (int i = 0; i < preorder.size(); i++) {
-            pre[preorder[i]] = i;
             in[inorder[i]]   = i;
         }
 
@@ -24,10 +23,10 @@ public:
     }
 
 private:
-    unordered_map<int, int> pre, in;
+    unordered_map<int, int> in;
 
     int build(vector<int>& preorder, int prel, TreeNode*& r,
-               vector<int>& inorder,  int inl,  int inr) {
+              vector<int>& inorder,  int inl,  int inr) {
         r = new TreeNode(preorder[prel]);
 
         int r_in = in[preorder[prel]];

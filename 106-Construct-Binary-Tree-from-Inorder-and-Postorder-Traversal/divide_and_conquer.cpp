@@ -13,7 +13,6 @@ class Solution {
 public:
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
         for (int i = 0; i < inorder.size(); i++) {
-            post[postorder[i]] = i;
             in[inorder[i]]   = i;
         }
 
@@ -25,10 +24,10 @@ public:
     }
 
 private:
-    unordered_map<int, int> post, in;
+    unordered_map<int, int> in;
 
     int build(vector<int>& postorder, int postl, TreeNode*& r,
-              vector<int>& inorder,  int inl,  int inr) {
+              vector<int>& inorder,   int inl,   int inr) {
         r = new TreeNode(postorder[postl]);
 
         int r_in = in[postorder[postl]];
