@@ -9,7 +9,7 @@ public:
             j--;
         }
 
-        if (i == j) {return true;}
+        if (i >= j) {return true;}
 
         return (PalindromeCheck(s, i + 1, j) || PalindromeCheck(s, i, j - 1));
     }
