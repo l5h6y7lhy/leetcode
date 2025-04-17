@@ -1,31 +1,36 @@
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
-        return QuickSelect(nums, k);
+        tmp.resize(nums.size());
+        return QuickSelect(nums, k, 0, nums.size() - 1);
     }
 
 private:
-    int QuickSelect(vector<int>& nums, int k) {
-        if (nums.size() == 1) {
-            return nums[0];
-        }
+    vector<int> tmp;
 
-        vector<int> left, right;
-        int c = nums.size() / 2;
+    int QuickSelect(vector<int>& nums, int k, int start, int end) {
         int c_count = 1;
+        int lc = 0, rc = 0;
 
-        for (int i = 0; i < nums.size(); i++) {
-            if (i == c) {continue;}
-            if (nums[i] < nums[c]) {left.push_back(nums[i]);}
-            else if (nums[i] > nums[c]) {right.push_back(nums[i]);}
+        for (int i = start + 1; i <= end; i++) {
+            if (nums[i] < nums[start]) {
+                tmp[start + lc] = nums[i];
+                lc++;
+            }
+            else if (nums[i] > nums[start]) {
+                tmp[end - rc] = nums[i];
+                rc++;
+            }
             else {c_count++;}
         }
 
-        if (right.size() >= k) {
-            return QuickSelect(right, k);
+        if (rc >= k) {
+            for (int i = 0; i < rc; i++) {nums[end - i] = tmp[end - i];}
+            return QuickSelect(nums, k, end - rc + 1, end);
         }
-        else if (right.size() + c_count >= k) {return nums[c];}
+        else if (rc + c_count >= k) {return nums[start];}
 
-        return QuickSelect(left, k - right.size() - c_count);
+        for (int i = 0; i < lc; i++) {nums[start + i] = tmp[start + i];}
+        return QuickSelect(nums, k - rc - c_count, start, start + lc - 1);
     }
 };
