@@ -5,37 +5,33 @@ public:
         m = matrix.size();
         n = matrix[0].size();
 
-        heights.resize(m);
-        for (int i = 0; i < m; i++) {heights[i].resize(n);}
+        heights.assign(m, 0);
 
         for (int j = 0; j < n; j++) {
             stack<int> r;
             vector<int> result(m, 0);
 
             for (int i = 0; i < m; i++) {
-                if (matrix[i][j] == '0') {
-                    heights[i][j] = 0;
-                }
-                else if (j == 0) {
-                    heights[i][j] = 1;
+                if (matrix[i][j] == '1') {
+                    heights[i]++;
                 }
                 else {
-                    heights[i][j] = heights[i][j - 1] + 1;
+                    heights[i] = 0;
                 }
 
                 while (!r.empty()) {
                     int curr = r.top();
 
-                    if (heights[curr][j] <= heights[i][j]) {
+                    if (heights[curr] < heights[i]) {
                         break;
                     }
 
-                    result[curr] += heights[curr][j] * (i - curr - 1);
+                    result[curr] += heights[curr] * (i - curr - 1);
                     r.pop();
                 }
 
                 int lb = r.empty() ? -1 : r.top();
-                result[i] += heights[i][j] * (i - lb);
+                result[i] += heights[i] * (i - lb);
                 r.push(i);
             }
 
@@ -44,7 +40,7 @@ public:
 
             while (!r.empty()) {
                 int lo = r.top();
-                result[lo] += heights[lo][j] * (rb - lo);
+                result[lo] += heights[lo] * (rb - lo);
                 r.pop();
             }
 
@@ -59,5 +55,5 @@ public:
 private:
     int m, n;
     int maxA;
-    vector<vector<int>> heights;
+    vector<int> heights;
 };
