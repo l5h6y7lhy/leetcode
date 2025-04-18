@@ -9,7 +9,7 @@ public:
             while (!r.empty()) {
                 int curr = r.top();
 
-                if (heights[curr] <= heights[i]) {
+                if (heights[curr] < heights[i]) {
                     break;
                 }
 
