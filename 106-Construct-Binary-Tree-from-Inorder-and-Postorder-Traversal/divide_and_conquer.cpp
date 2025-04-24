@@ -13,7 +13,7 @@ class Solution {
 public:
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
         for (int i = 0; i < inorder.size(); i++) {
-            in[inorder[i]]   = i;
+            in[inorder[i]] = i;
         }
 
         TreeNode* root;
