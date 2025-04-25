@@ -1,8 +1,8 @@
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
-        unordered_map<string, bool> r;
-        for (int i = 0; i < wordDict.size(); i++) {r[wordDict[i]] = true;}
+        unordered_set<string> r;
+        for (int i = 0; i < wordDict.size(); i++) {r.insert(wordDict[i]);}
 
         vector<bool> b(20, false);
         b[0] = true;
@@ -18,7 +18,7 @@ public:
             bool cp = false;
 
             while (!tmp.empty()) {
-                if (r[tmp] && b[(p - len + 20) % 20]) {
+                if (r.find(tmp) != r.end() && b[(p - len + 20) % 20]) {
                     cp = true;
                     break;
                 }
