@@ -7,16 +7,16 @@ public:
         if (sum % k == 0) {return true;}
 
         int prev = 0;
-        unordered_map<int, bool> r;
+        unordered_set<int> r;
+        r.insert(0);
 
         for (int i = 0; i < nums.size() - 2; i++) {
             prev += nums[i];
-            r[prev % k] = true;
+            r.insert(prev % k);
             sum += nums[i + 2];
-            int tmp = sum % k;
 
-            if (tmp == 0) {return true;}
-            if (r[tmp]) {return true;}
+            int tmp = sum % k;
+            if (r.find(tmp) != r.end()) {return true;}
         }
 
         return false;

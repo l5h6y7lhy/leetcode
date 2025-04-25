@@ -16,11 +16,11 @@ private:
         if (search(nums, k, middle + 1, end)) {return true;}
 
         int total = 0;
-        unordered_map<int, bool> r;
+        unordered_set<int> r;
 
         for (int i = middle; i >= start; i--) {
             total += nums[i];
-            r[total % k] = true;
+            r.insert(total % k);
         }
 
         total = 0;
@@ -29,8 +29,8 @@ private:
             total += nums[i];
             int tmp = total % k;
 
-            if (!tmp && r[tmp]) {return true;}
-            else if (r[k - tmp]) {return true;}
+            if (!tmp && r.find(tmp) != r.end()) {return true;}
+            else if (r.find(k - tmp) != r.end()) {return true;}
         }
 
         return false;
