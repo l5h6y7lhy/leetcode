@@ -1,0 +1,3 @@
+https://www.geeksforgeeks.org/closest-pair-of-points-using-sweep-line-algorithm/
+https://www.topcoder.com/thrive/articles/Line%20Sweep%20Algorithms
+https://www.topcoder.com/thrive/articles/Binary%20Indexed%20Trees
