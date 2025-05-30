@@ -63,12 +63,9 @@ private:
         LRUnode* p = c->prev;
 
         if (p) {p->next = c->next;}
-        if (n) {n->prev = c->prev;}
+        else {head = c->next;}
 
-        if (!p) {
-            head = c->next;
-        }
-
+        n->prev = c->prev;
         buildTail(c);
     }
 
