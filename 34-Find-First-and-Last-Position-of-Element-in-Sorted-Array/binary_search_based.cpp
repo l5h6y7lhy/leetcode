@@ -36,7 +36,7 @@ private:
             if (!limit) {end = middle - 1;}
             else {start = middle + 1;}
         }
-        else if (nums[middle] >= target) {
+        else if (nums[middle] > target) {
             end = middle - 1;
         }
         else {
