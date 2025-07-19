@@ -7,7 +7,6 @@ public:
             if (piles[i] > ms) {ms = piles[i];}
         }
 
-        result = INT_MAX;
         search(piles, h, 1, ms);
 
         return result;
