@@ -12,7 +12,6 @@ public:
                 if (tmp > curr) {curr = tmp;}
             }
 
-            if (p[i + 1] > curr) {curr = p[i + 1];}
             p[i] = curr;
         }
 
