@@ -38,9 +38,7 @@ private:
             seq.push_back(curr);
 
             for (int i = 0; i < p[curr].size(); i++) {
-                if (q[p[curr][i]]) {
-                    q[p[curr][i]]--;
-                }
+                q[p[curr][i]]--;
 
                 if (!q[p[curr][i]]) {
                     f.push(p[curr][i]);

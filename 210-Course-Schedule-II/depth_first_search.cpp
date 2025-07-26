@@ -32,9 +32,7 @@ private:
         seq.push_back(start);
 
         for (int i = 0; i < p[start].size(); i++) {
-            if (q[p[start][i]]) {
-                q[p[start][i]]--;
-            }
+            q[p[start][i]]--;
 
             if (!q[p[start][i]]) {
                 dfs(p[start][i]);
