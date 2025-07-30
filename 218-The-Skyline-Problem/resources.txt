@@ -2,3 +2,5 @@ https://www.geeksforgeeks.org/closest-pair-of-points-using-sweep-line-algorithm/
 https://www.topcoder.com/thrive/articles/Line%20Sweep%20Algorithms
 https://www.topcoder.com/thrive/articles/Binary%20Indexed%20Trees
 https://www.hackerearth.com/practice/data-structures/advanced-data-structures/segment-trees/tutorial/
+https://algo.monster/liteproblems/218
+https://walkccc.me/LeetCode/problems/218/
