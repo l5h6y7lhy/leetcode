@@ -65,7 +65,7 @@ private:
         if (p) {p->next = c->next;}
         else {head = c->next;}
 
-        n->prev = c->prev;
+        n->prev = p;
         buildTail(c);
     }
 
