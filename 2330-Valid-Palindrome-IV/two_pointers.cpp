@@ -6,7 +6,7 @@ public:
 
         while (i < j) {
             if (s[i] != s[j]) {
-                if (c >= 2) {break;}
+                if (c == 2) {break;}
                 c++;
             }
             i++;
