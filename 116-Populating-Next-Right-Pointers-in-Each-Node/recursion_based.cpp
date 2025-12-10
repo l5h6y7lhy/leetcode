@@ -20,14 +20,6 @@ class Solution {
 public:
     Node* connect(Node* root) {
         dfs(root);
-
-        Node* c = root;
-
-        while (c) {
-            c->next = NULL;
-            c = c->right;
-        }
-
         return root;
     }
 
