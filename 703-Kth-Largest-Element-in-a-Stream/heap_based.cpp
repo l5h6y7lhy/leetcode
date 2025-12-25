@@ -1,18 +1,11 @@
 class KthLargest {
 public:
     KthLargest(int k, vector<int>& nums) {
-        for (int i = 0; i < nums.size(); i++) {
-            if (r.size() < k) {
-                r.push_back(nums[i]);
-                heapifyUp(r.size());
-            }
-            else if (nums[i] > r[0]) {
-                r[0] = nums[i];
-                heapifyDown(1);
-            }
-        }
-
         t = k;
+
+        for (int i = 0; i < nums.size(); i++) {
+            add(nums[i]);
+        }
     }
 
     int add(int val) {
