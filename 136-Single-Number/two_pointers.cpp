@@ -19,7 +19,7 @@ public:
 
         while (1) {
             int l = nums.size() - 1;
-            bool even = (s % 2 == 0) ? true : false;
+            bool even = (s % 2 == 0);
             eo.push_back(even);
 
             while (curr <= l) {
